@@ -22,8 +22,6 @@ public class MemberRepository {
      */
     void addNewMember(Member newMember) {
 
-        // 이메일이 중복인가?
-
         // 배열에 데이터를 추가하는 로직
         Member[] temp = new Member[members.length + 1];
         for (int i = 0; i < members.length; i++) {
@@ -41,11 +39,31 @@ public class MemberRepository {
      * @sinces 2024.04.16.
      */
     boolean isDuplicateEmail(String targetEmail) {
+        return findMemberByEmail(targetEmail) != null;
+    }
+
+    /**
+     * 이메일을 통해 회원의 모든 정보(객체)를 가져오는 메서드
+     * @param inputEmail - 사용자가 입력한 이메일 값
+     * @return - 해당 이메일을 통해 찾아낸 회원 객체, 만약 찾지 못하면 null 리턴
+     */
+    public Member findMemberByEmail(String inputEmail) {
         for (Member m : members) {
-            if (targetEmail.equals(m.email)) {
-                return true;
+            if(inputEmail.equals(m.email)) {
+                return m;
             }
         }
-        return false;
+        return null;
+    }
+
+
+    int indexOf(String targetEmail) {
+        for (int i = 0; i < members.length; i++) {
+            if (targetEmail.equals(members[i].email)) {
+                return i;
+            }
+        }
+        return -1
+                ;
     }
 }

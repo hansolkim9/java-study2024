@@ -23,19 +23,24 @@ public class MemberView {
 
     // 회원정보 생성을 위해 입력을 처리
     void inputNewMember() {
+
+        System.out.println();
+        System.out.println("# 회원 등록을 시작합니다!!");
         String email = null;
         while (true) {
-            email = si.input("- 이메일: ");
+            email = si.input("# 이메일: ");
             if(!mr.isDuplicateEmail(email)) {
                 break;
             }
             System.out.println("중복된 이메일입니다.");
         }
 
-        String name = si.input("- 이름: ");
-        String password = si.input("- 패스워드: ");
-        String gender = si.input("- 성별: ");
-        int age = Integer.parseInt(si.input("- 나이: "));
+        String name = si.input("# 이름: ");
+        String password = si.input("# 패스워드: ");
+        String gender = si.input("# 성별: ");
+        int age = Integer.parseInt(si.input("# 나이: "));
+
+        System.out.println("# 회원 가입 성공!!");
 
         // 입력데이터를 기반으로 한 명의 회원 객체를 생성
         Member newMember = new Member(email, password, name, gender, age);
@@ -51,10 +56,14 @@ public class MemberView {
         System.out.println("* 2. 개별회원 정보 조회하기");
         System.out.println("* 3. 전체회원 정보 조회하기");
         System.out.println("* 4. 회원 정보 수정하기");
-        System.out.println("* 5. 프로그램 종료");
+        if (mr.members.length == 0) {
+        } else {
+            System.out.println("* 5. 프로그램 종료");
+        }
+        System.out.println("* 6. 프로그램 끝내기");
         System.out.println("=========================");
 
-        String menuNumber = si.input("- 메뉴 번호: ");
+        String menuNumber = si.input(">> ");
         return menuNumber;
     }
 
@@ -71,4 +80,22 @@ public class MemberView {
 
     }
 
+    // 이메일 입력받고 찾은 회원정보를 출력
+    public void getMember() {
+        String inputEmail = si.input("# 조회를 시작합니다!\n# 이메일: ");
+
+        // 이메일이 일치하는 회원이 있는지 조회
+        Member foundMember = mr.findMemberByEmail(inputEmail);
+
+        if(foundMember != null) {
+            System.out.println("========== 조회 결과 ==========");
+            System.out.println("# 이름: " + foundMember.memberName);
+            System.out.println("# 비밀번호: " + foundMember.password);
+            System.out.println("# 성별: " + foundMember.gender);
+            System.out.println("# 나이: " + foundMember.age);
+            System.out.println();
+        } else {
+            System.out.println("# 조회된 회원이 없습니다.");
+        }
+    }
 }
