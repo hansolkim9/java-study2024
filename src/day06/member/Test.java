@@ -18,5 +18,15 @@ public class Test {
         System.out.println("m2 = " + m2);
 
         Member[] members = {m1, m2};
+
+        MemberRepository mr = new MemberRepository();
+        MemberView mv = new MemberView();
+
+        Member newMember = new Member("ad@fb.com", "2131", "김춘식", "남성", 12);
+
+        mr.addNewMember(newMember);
+
+        mv.showMembers();
+
     }
 }
