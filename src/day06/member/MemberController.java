@@ -32,8 +32,12 @@ public class MemberController {
                     mv.showMembers();
                     break;
                 case "4":
+                    // 이메일을 입력받아서 회원 비밀번호를 수정하는 코드
+                    mv.editPassword();
                     break;
                 case "5":
+                    // 이메일을 입력받아서 회원 정보 삭제하는 코드
+                    mv.deleteMember();
                     break;
                 case "6":
                     boolean flag = mv.exitProgram();

@@ -5,10 +5,12 @@ public class MemberRepository {
 
     // 필드
     static Member[] members;
+    static Member[] restoreList;
 
     // 생성자
     MemberRepository() {
-        this.members = new Member[3];
+        this.members = new Member[3]; // 현재 관리되는 회원 배열
+        this.restoreList = new Member[0]; // 삭제된 회원들이 모일 배열
         members[0] = new Member("abc@def.com", "23", "김영식", "남성", 10);
         members[1] = new Member("aec@def.com", "13", "김춘배", "남성", 11);
         members[2] = new Member("cwt@def.com", "12", "김팔봉", "남성", 12);
@@ -56,14 +58,15 @@ public class MemberRepository {
         return null;
     }
 
+    public void deleteMemberByEmail(String inputEmail) {
 
-    int indexOf(String targetEmail) {
-        for (int i = 0; i < members.length; i++) {
-            if (targetEmail.equals(members[i].email)) {
-                return i;
+        Member[] temp = new Member[members.length - 1];
+        for (int i = 0, j = 0; i < members.length; i++) {
+            if(!members[i].email.equals(inputEmail)) {
+                temp[j] = members[i];
+                j++;
             }
         }
-        return -1
-                ;
+        members = temp;
     }
 }

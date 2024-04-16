@@ -23,6 +23,7 @@ public class MemberView {
 
     // 회원정보 생성을 위해 입력을 처리
     void inputNewMember() {
+        if(mr.members.length >= 10) return;
 
         System.out.println();
         System.out.println("# 회원 등록을 시작합니다!!");
@@ -52,13 +53,16 @@ public class MemberView {
     // 사용자에게 보여줄 전체 메뉴 화면 출력
     String showProgramMenu() {
         System.out.println("\n##### 회원 관리 시스템 #####");
-        System.out.println("* 1. 회원 정보 등록하기");
+        if (mr.members.length >= 10) {
+        } else {
+            System.out.println("* 1. 회원 정보 등록하기");
+        }
         System.out.println("* 2. 개별회원 정보 조회하기");
         System.out.println("* 3. 전체회원 정보 조회하기");
-        System.out.println("* 4. 회원 정보 수정하기");
+        System.out.println("* 4. 비밀번호 변경하기");
         if (mr.members.length == 0) {
         } else {
-            System.out.println("* 5. 프로그램 종료");
+            System.out.println("* 5. 회원 정보 삭제하기");
         }
         System.out.println("* 6. 프로그램 끝내기");
         System.out.println("=========================");
@@ -94,6 +98,47 @@ public class MemberView {
             System.out.println("# 성별: " + foundMember.gender);
             System.out.println("# 나이: " + foundMember.age);
             System.out.println();
+        } else {
+            System.out.println("# 조회된 회원이 없습니다.");
+        }
+    }
+
+    public void editPassword() {
+        String inputEmail = si.input("# 수정할 대상의 이메일: ");
+
+        // 이메일이 일치하는 회원이 있는지 조회
+        Member foundMember = mr.findMemberByEmail(inputEmail);
+        if(foundMember != null) {
+            System.out.printf("%s님의 비밀번호를 변경합니다!\n", foundMember.memberName);
+            String newPassword = si.input("# 새로운 비밀번호: ");
+
+            foundMember.changePassword(newPassword);
+
+            System.out.println("\n# 비밀번호가 변경되었습니다.\n");
+        } else {
+            System.out.println("# 조회된 회원이 없습니다.");
+        }
+    }
+
+    public void deleteMember() {
+        if(mr.members.length == 0) return;
+        String inputEmail = si.input("# 삭제할 회원의 이메일: ");
+        // 이메일이 일치하는 회원이 있는지 조회
+        Member foundMember = mr.findMemberByEmail(inputEmail);
+        // 비밀번호 검증
+        String password = si.input("# 비밀번호를 입력하세요: ");
+        if(!password.equals(mr.findMemberByEmail(inputEmail).password)) {
+            System.out.println("비밀번호가 틀렸습니다.\n");
+            return;
+        }
+
+        if(foundMember != null) {
+            System.out.printf("%s님의 정보를 정말 삭제합니까?", foundMember.memberName);
+            String delete = si.input(" [y/n] : ");
+            if (delete.equals("y")) {
+                mr.deleteMemberByEmail(inputEmail);
+                System.out.println("\n# 회원 정보 삭제 성공!!\n");
+            }
         } else {
             System.out.println("# 조회된 회원이 없습니다.");
         }
