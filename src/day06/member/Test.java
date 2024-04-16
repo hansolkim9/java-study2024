@@ -28,9 +28,14 @@ public class Test {
 //
 //        mv.showMembers();
 
-        MemberRepository mr = new MemberRepository();
-        Member foundMember = mr.findMemberByEmail("abc@def.com");
-        System.out.println("foundMember = " + foundMember);
+//        MemberRepository mr = new MemberRepository();
+//        Member foundMember = mr.findMemberByEmail("abc@def.com", mr.members);
+//        System.out.println("foundMember = " + foundMember);
+
+        Member member = new Member("d", "d", "d", "d", 1);
+        Member member2 = new Member("d", "d", "d", "d", 1);
+        Member member3 = new Member("d", "d", "d", "d", 1);
+        System.out.println(member.idx);
 
     }
 }

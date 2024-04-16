@@ -41,7 +41,7 @@ public class MemberRepository {
      * @sinces 2024.04.16.
      */
     boolean isDuplicateEmail(String targetEmail) {
-        return findMemberByEmail(targetEmail) != null;
+        return findMemberByEmail(targetEmail, members) != null;
     }
 
     /**
@@ -49,8 +49,8 @@ public class MemberRepository {
      * @param inputEmail - 사용자가 입력한 이메일 값
      * @return - 해당 이메일을 통해 찾아낸 회원 객체, 만약 찾지 못하면 null 리턴
      */
-    public Member findMemberByEmail(String inputEmail) {
-        for (Member m : members) {
+    public Member findMemberByEmail(String inputEmail, Member[] inputArray) {
+        for (Member m : inputArray) {
             if(inputEmail.equals(m.email)) {
                 return m;
             }
@@ -65,8 +65,33 @@ public class MemberRepository {
             if(!members[i].email.equals(inputEmail)) {
                 temp[j] = members[i];
                 j++;
+            } else if (members[i].email.equals(inputEmail)) {
+                Member[] restore = new Member[restoreList.length + 1];
+                for (int k = 0; k < restoreList.length; k++) {
+                    restore[k] = restoreList[k];
+                }
+                restore[restore.length - 1] = members[i];
+                restoreList = restore;
             }
         }
         members = temp;
+    }
+
+    public void restoreMemberByEmail(String inputEmail) {
+        Member[] temp = new Member[restoreList.length - 1];
+        for (int i = 0, j = 0; i < restoreList.length; i++) {
+            if(!restoreList[i].email.equals(inputEmail)) {
+                temp[j] = restoreList[i];
+                j++;
+            } else if (restoreList[i].email.equals(inputEmail)) {
+                Member[] restore = new Member[members.length + 1];
+                for (int k = 0; k < members.length; k++) {
+                    restore[k] = members[k];
+                }
+                restore[restore.length - 1] = restoreList[i];
+                members = restore;
+            }
+        }
+        restoreList = temp;
     }
 }

@@ -5,7 +5,8 @@ import java.time.LocalDate;
 // 역할: 회원 1명의 정보를 가지고 있어야 한다.
 public class Member {
 
-    int id; // 식별번호
+    static int idx = 0; // 식별번호
+    int id;
     String email;
     String memberName;
     String password;
@@ -18,7 +19,8 @@ public class Member {
     // 시스템이 생성하는 데이터: 회원번호, 회원가입일자
     // 사용자가 제공하는 데이터: 이메일, 패스워드, 이름, 성별, 나이
     Member(String email, String password, String memberName, String gender, int age) {
-        this.id = 1;
+        idx++;
+        this.id = idx;
         this.regDate = LocalDate.now(); // 현재 시간을 읽어서 처리
 
         this.email = email;
@@ -31,8 +33,8 @@ public class Member {
 
     // toString: 객체의 정보를 출력할 수 있음
     public String toString() {
-        return String.format("# 이름: %s, 이메일: %s, 나이: %d세, 성별: %s, 가입일: %s",
-                        this.memberName, this.email, this.age, this.gender, this.regDate);
+        return String.format("# %d번 | 이름: %s | 이메일: %s | 나이: %d세 | 성별: %s | 가입일: %s",
+                        this.id, this.memberName, this.email, this.age, this.gender, this.regDate);
     }
 
     // 회원의 비밀번호를 수정하는 메서드

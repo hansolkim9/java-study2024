@@ -3,6 +3,7 @@ package day06.member;
 import util.SimpleInput;
 
 import java.sql.SQLOutput;
+import java.util.Arrays;
 
 // 역할: 사용자의 메뉴 입력을 분기하는 역할
 public class MemberController {
@@ -36,10 +37,14 @@ public class MemberController {
                     mv.editPassword();
                     break;
                 case "5":
-                    // 이메일을 입력받아서 회원 정보 삭제하는 코드
+                    // 이메일을 입력받아서 회원 정보 삭제, 삭제된 정보는 restoreList에 저장하는 코드
                     mv.deleteMember();
                     break;
                 case "6":
+                    // 이메일을 입력받아서 회원 정보 복구
+                    mv.restoreMember();
+                    break;
+                case "7":
                     boolean flag = mv.exitProgram();
                     if (flag) return;
             } // end switch
