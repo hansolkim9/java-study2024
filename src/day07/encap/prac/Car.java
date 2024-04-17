@@ -1,4 +1,4 @@
-package day07.prac;
+package day07.encap.prac;
 
 import java.time.LocalDate;
 

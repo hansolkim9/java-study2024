@@ -1,4 +1,4 @@
-package day07.prac;
+package day07.encap.prac;
 
 public class PasswordManager {
 //    **비밀번호 관리 클래스**
