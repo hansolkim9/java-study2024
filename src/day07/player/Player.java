@@ -12,6 +12,12 @@ public class Player {
     int level;
     int hp;
 
+    Player(String nickName) {
+        this.nickName = nickName;
+        this.level = 1;
+        this.hp = 50;
+    }
+
     // 현재 캐릭터 정보를 출력
     public void showStatus() {
         System.out.println("\n========== Character's Info ==========");
