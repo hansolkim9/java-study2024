@@ -39,6 +39,11 @@ public class MemberView {
         String name = si.input("# 이름: ");
         String password = si.input("# 패스워드: ");
         String gender = si.input("# 성별: ");
+        if (gender.equals("M")) {
+            gender = MemberConstants.MALE;
+        } else if (gender.equals("F")) {
+            gender = MemberConstants.FEMALE;
+        }
         int age = Integer.parseInt(si.input("# 나이: "));
 
         System.out.println("# 회원 가입 성공!!");
