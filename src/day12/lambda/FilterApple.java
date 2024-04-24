@@ -44,4 +44,38 @@ public class FilterApple {
 		}
 		return filteredApples;
 	}
+
+	/**
+	 * @solution - try3 : 동작(메서드)을 추상화시켜 파라미
+	 * @problem - 필터링 대상이 사과가 아니라 오렌지 등..?
+	 * @param basket
+	 * @return
+	 */
+	public static List<Apple> filterApples(List<Apple> basket, ApplePredicate p) {
+		List<Apple> filteredApples = new ArrayList<>();
+
+		for (Apple apple : basket) {
+			if (p.test(apple)) {
+				filteredApples.add(apple);
+			}
+		}
+		return filteredApples;
+	}
+
+	/**
+	 * @solution - try4 : 여러 객체들을 필터링
+	 * @param basket
+	 * @param p
+	 * @return
+	 */
+	public static <T> List<T> filter(List<T> basket, GenericPredicate<T> p) {
+		List<T> filteredList = new ArrayList<>();
+
+		for (T t : basket) {
+			if (p.test(t)) {
+				filteredList.add(t);
+			}
+		}
+		return filteredList;
+	}
 }
