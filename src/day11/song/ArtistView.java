@@ -51,11 +51,13 @@ public class ArtistView {
 		if (!repository.isRegistered(artistName)) { // 신규 등록
 			repository.addNewArtist(artistName, songName);
 			System.out.printf("# %s님이 신규 등록 되었습니다.", artistName);
+			repository.save();
 		} else { // 신규 등록 아니라 기존 가수에 곡명만 추가
 			// 새로운 노래를 추가해 본다. 추가가 잘 되었는지 여부를 확인한다.
 			boolean flag = repository.addNewSong(artistName, songName);
 			if (flag) { // 기존 가수의 트랙리스트에 노래만 추가하는 경우
 				System.out.printf("\n# %s님의 노래목록에 %s곡이 추가되었습니다.\n", artistName, songName);
+
 			} else { // 노래 중복된 경우
 				System.out.printf("\n# [%s]곡은 이미 등록된 노래입니다.\n", songName);
 			}
