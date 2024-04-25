@@ -41,10 +41,10 @@ public class Mapping {
 		// 메뉴 목록에서 메뉴이름과 칼로리를 추출해서
 		// 새로운 객체에 포장하고 싶다면
 		List<SimpleDish> simpleDishLish = menuList.stream()
-				.map(dish -> new SimpleDish(dish))
+				.map(SimpleDish::new)
 				.collect(Collectors.toList());
 
-		simpleDishLish.forEach(sd -> System.out.println(sd));
+		simpleDishLish.forEach(System.out::println);
 
 		/*
             메뉴 목록에서 칼로리가 500칼로리보다 큰
