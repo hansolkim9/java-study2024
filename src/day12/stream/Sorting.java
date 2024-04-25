@@ -22,6 +22,7 @@ public class Sorting {
 		System.out.println("===========================");
 		// 메뉴 목록에서 메뉴들을 이름 내림차로 정렬 (zyx, 하파타 순)
 		menuList.stream()
+//				.sorted(Comparator.comparing((Dish dish) -> dish.getName()).reversed())
 				.sorted(Comparator.comparing(Dish::getName).reversed())
 				.collect(Collectors.toList())
 				.forEach(System.out::println);
